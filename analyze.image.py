@@ -5,10 +5,15 @@ from decimal import Decimal
 
 # Environment Variables for GitHub Secrets
 s3_bucket = os.environ['S3_BUCKET']
-branch = os.environ.get("BRANCH_NAME", "not-main")
+branch = os.environ.get("BRANCh_NAME", "not-main")
 env = os.environ.get('DEPLOY_ENV', 'beta')
 table_name = os.environ['DYNAMODB_TABLE_BETA'] if env == 'beta' else os.environ['DYNAMODB_TABLE_PROD']
 print("S3_BUCKET =", os.environ.get('S3_BUCKET'))
+
+print("S3_BUCKET =", s3_bucket)
+print("BRANCH_NAME =", branch)
+print("DEPLOY_ENV =", env)
+print("DynamoDB Table =", table_name)
 
 #AWS Clients from GitHub Secrets
 session = boto3.Session(
