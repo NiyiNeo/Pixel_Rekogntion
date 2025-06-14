@@ -8,8 +8,7 @@ This project implements a CI/CD workflow that:
 - Uses GitHub Actions to automate labeling on pull request and main branch merge
 
 # AWS Resources Setup
-
-** 1. **S3 Bucket****
+** 1. **S3 Bucket**
   Create a bucket to store images for Rekognition.
   Use a folder prefix like rekognition-input/ for uploaded images.
 
