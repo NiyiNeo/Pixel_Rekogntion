@@ -51,8 +51,8 @@ def process_image(local_path, s3_key):
 #Main
 def main():
     images = {
-        'images/audi_q5.jpeg': 'rekognition-input/audi_q5.jpeg',
-        'images/desktop.jpg': 'rekognition-input/desktop.jpg'
+        './images/audi_q5.jpeg': 'rekognition-input/audi_q5.jpeg',
+        './images/desktop.jpg': 'rekognition-input/desktop.jpg'
     }
     for local, remote in images.items():
         process_image(local, remote)
