@@ -1,0 +1,37 @@
+name: Rekognition Pipeline (Beta)
+
+on:
+  pull_request:
+
+jobs:
+  rekognition_beta:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      DYNAMODB_TABLE_BETA: ${{ secrets.DYNAMODB_TABLE_BETA }}
+      DYNAMODB_TABLE_PROD: ${{ secrets.DYNAMODB_TABLE_PROD }}
+      BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
+      DEPLOY_ENV: beta
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install boto3
+        run: pip install boto3
+
+      - name: Run Rekognition analysis
+        run: python analyze_image.py
